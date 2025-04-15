@@ -13,7 +13,6 @@ OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY",
                                "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")
 MODEL = "arliai/qwq-32b-arliai-rpr-v1:free"
 
-# Оригинальный системный промпт без изменений
 SYSTEM_PROMPT = """
 Ты — математический помощник для решения задач. 
 Твоя задача — внимательно проанализировать математическую задачу на изображении или в тексте,
@@ -82,7 +81,6 @@ def solve():
 
 @app.route('/solve-page')
 def solve_page():
-    # Новая функция для отображения страницы с решением
     problem = request.args.get('problem', '')
     solution = request.args.get('solution', '')
     return render_template('solve.html', problem=problem, solution=solution)
