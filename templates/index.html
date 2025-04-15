@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Math Solver</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
+    <div class="container">
+        <h1>Fizmatik Solver</h1>
+        <form id="solver-form">
+            <textarea name="problem" placeholder="Введите математическую задачу..." required></textarea>
+            <button type="submit">Решить</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

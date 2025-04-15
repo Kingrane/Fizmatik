@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Решение</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Решение задачи</h1>
+        <div class="problem">
+            <h3>Задача:</h3>
+            <p>{{ problem }}</p>
+        </div>
+        <div class="solution">
+            <h3>Решение:</h3>
+            <p>{{ solution|safe }}</p>
+        </div>
+        <a href="/">Назад</a>
+    </div>
+</body>
+</html>

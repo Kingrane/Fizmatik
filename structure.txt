@@ -1,0 +1,15 @@
+/fizmatik
+├── app.py                  # Главный Flask-сервер
+├── /templates              # HTML-страницы
+│   ├── index.html          # Главная страница
+│   ├── solve.html          # Страница решения задач
+│   ├── formulas.html       # База формул
+│   ├── login.html          # Авторизация
+│   └── profile.html        # Профиль пользователя
+├── /static                 # CSS/JS/Изображения
+│   ├── style.css
+│   └── script.js
+├── /data                   # База данных (JSON)
+│   ├── users.json          # Пользователи
+│   └── formulas.json       # Формулы
+└── requirements.txt        # Зависимости Python

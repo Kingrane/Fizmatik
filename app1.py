@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, jsonify
-from mistralai import Mistral
+import requests
+import json
 import os
 import logging
 from dotenv import load_dotenv
@@ -8,8 +9,9 @@ load_dotenv()
 
 app = Flask(__name__)
 
-MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY", "wR1Cp3zVnrh13YXW2z2USxNQsqhNuOPZ")
-MODEL = "pixtral-12b-2409"
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY",
+                               "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")
+MODEL = "arliai/qwq-32b-arliai-rpr-v1:free"
 
 # Оригинальный системный промпт без изменений
 SYSTEM_PROMPT = """
@@ -34,11 +36,26 @@ SYSTEM_PROMPT = """
 """
 
 
-def get_mistral_client():
+def call_openrouter_api(problem_text):
     try:
-        return Mistral(api_key=MISTRAL_API_KEY)
+        response = requests.post(
+            url="https://openrouter.ai/api/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+                "Content-Type": "application/json",
+            },
+            data=json.dumps({
+                "model": MODEL,
+                "messages": [
+                    {"role": "system", "content": SYSTEM_PROMPT},
+                    {"role": "user", "content": problem_text}
+                ],
+            })
+        )
+        response.raise_for_status()  # Проверка на ошибки HTTP
+        return response.json()["choices"][0]["message"]["content"]
     except Exception as e:
-        logging.error(f"Ошибка Mistral: {e}")
+        logging.error(f"Ошибка OpenRouter API: {e}")
         return None
 
 
@@ -53,24 +70,14 @@ def solve():
     if not problem_text:
         return jsonify({"error": "Текст задачи не предоставлен"}), 400
 
-    client = get_mistral_client()
-    if not client:
+    solution = call_openrouter_api(problem_text)
+    if not solution:
         return jsonify({"error": "Ошибка API"}), 500
 
-    try:
-        response = client.chat.complete(
-            model=MODEL,
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": problem_text}
-            ]
-        )
-        return jsonify({
-            "problem": problem_text,
-            "solution": response.choices[0].message.content
-        })
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    return jsonify({
+        "problem": problem_text,
+        "solution": solution
+    })
 
 
 @app.route('/solve-page')
