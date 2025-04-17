@@ -1,29 +1,36 @@
-document.getElementById('solver-form').addEventListener('submit', async (e) => {
+document.getElementById('solver-form').addEventListener('submit', async function (e) {
     e.preventDefault();
-    const formData = new FormData(e.target);
+
+    const form = e.target;
+    const problem = form.problem.value.trim();
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = "Решаю... ⏳";
 
     try {
         const response = await fetch('/solve', {
             method: 'POST',
-            body: formData  // Отправляем FormData, а не JSON
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({ problem })
         });
-
-        if (!response.ok) {
-            throw new Error('Ошибка сервера');
-        }
 
         const data = await response.json();
 
-        if (data.error) {
-            document.getElementById('result').innerHTML =
-                `<div class="error">${data.error}</div>`;
-        } else {
-            // Перенаправляем на страницу с решением
-            window.location.href = `/solve-page?problem=${encodeURIComponent(data.problem)}&solution=${encodeURIComponent(data.solution)}`;
+        if (!response.ok) {
+            throw new Error(data.error || "Неизвестная ошибка.");
         }
-    } catch (error) {
-        document.getElementById('result').innerHTML =
-            `<div class="error">Ошибка соединения: ${error.message}</div>`;
-        console.error('Ошибка:', error);
+
+        resultDiv.innerHTML = `
+            <h3>Задача:</h3>
+            <p>${data.problem}</p>
+            <h3>Решение:</h3>
+            <p>${data.solution}</p>
+            <a href="/solve-page?problem=${encodeURIComponent(data.problem)}&solution=${encodeURIComponent(data.solution)}">Открыть на отдельной странице</a>
+        `;
+
+        if (window.MathJax) MathJax.typeset(); // Рендер LaTeX
+    } catch (err) {
+        resultDiv.innerHTML = `<p style="color: red;">Ошибка: ${err.message}</p>`;
     }
 });

@@ -10,10 +10,9 @@ load_dotenv()
 app = Flask(__name__)
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY",
-                               "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")
-MODEL = "arliai/qwq-32b-arliai-rpr-v1:free"
+                               "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")
+MODEL = "meta-llama/llama-4-scout:free"
 
-# Оригинальный системный промпт без изменений
 SYSTEM_PROMPT = """
 Ты — математический помощник для решения задач. 
 Твоя задача — внимательно проанализировать математическую задачу на изображении или в тексте,
@@ -54,6 +53,10 @@ def call_openrouter_api(problem_text):
         )
         response.raise_for_status()  # Проверка на ошибки HTTP
         return response.json()["choices"][0]["message"]["content"]
+    except requests.exceptions.HTTPError as http_err:
+        logging.error(f"HTTP error occurred: {http_err}")
+        logging.error(f"Response body: {response.text}")  # Логируем тело ответа
+        return None
     except Exception as e:
         logging.error(f"Ошибка OpenRouter API: {e}")
         return None
@@ -82,7 +85,6 @@ def solve():
 
 @app.route('/solve-page')
 def solve_page():
-    # Новая функция для отображения страницы с решением
     problem = request.args.get('problem', '')
     solution = request.args.get('solution', '')
     return render_template('solve.html', problem=problem, solution=solution)
