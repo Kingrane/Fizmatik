@@ -9,8 +9,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY",
-                               "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")
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 MODEL = "meta-llama/llama-4-scout:free"
 
 SYSTEM_PROMPT = """
