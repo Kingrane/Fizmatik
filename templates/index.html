@@ -2,15 +2,22 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Fizmatik Solver</title>
+    <title>Fizmatik</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!--  ШРИФТЫ  -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap&subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap&subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="stitle">
+        <h1>Fizmatik</h1>
+    </div>
     <div class="container">
-        <h1>Fizmatik Solver</h1>
         <form id="solver-form">
             <textarea name="problem" placeholder="Введите математическую задачу..." required></textarea>
             <button type="submit">Решить</button>

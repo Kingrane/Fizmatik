@@ -1,9 +1,10 @@
 
 body {
-    font-family: sans-serif;
-    background: linear-gradient(135deg, #e0f7fa, #b3e5fc);
+    font-family: 'Bricolage Grotesque', sans-serif;
+    background: linear-gradient(115deg, #ffffcc, #e6ccff);
     margin: 0;
     padding: 0;
+    font-family: 'Unbounded';
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,33 +13,60 @@ body {
 
 
 .container {
-    max-width: 600px;
+    font-family: 'Unbounded';
+    width: 80%;
+    max-width: 700px;
+    height: 80hv;
     padding: 50px;
     background: white;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.55);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
+.stitle{
+    position: fixed;
+    top: 20px;
+    left: 30px;
+    z-index: 10;
+}
+
+.stitle h1{
+    margin: 0;
+    font-family: 'Unbounded';
+    font-size: 32px;
+    color: #333;
+    letter-spacing: 4px;
+}
 
 textarea {
+    font-family: 'Unbounded';
     width: 100%;
-    height: 150px;
+    height: 80px;
     padding: 5px;
     font-size: 16px;
-    border-radius: 8px;
-    border: 3px solid #e0e0e0;
+    border-radius: 15px;
+    border: 4px solid black;
     background: #f9f9f9;
     margin-bottom: 20px;
     resize: vertical;
 }
 
+textarea:focus {
+    outline: none;
+    border-color: #01003f;
+}
+
 
 button {
+    font-family: 'Unbounded';
     padding: 12px 24px;
-    background: #3498db;
+    background: #6d6bed;
     color: white;
-    border: none;
-    border-radius: 5px;
+    border: 3px solid black;
+    border-radius: 15px;
     font-size: 16px;
     cursor: pointer;
     transition: background 0.3s ease;
@@ -50,7 +78,13 @@ button:hover {
 
 /* Стиль для результата */
 #result {
+    font-family: 'Unbounded';
     margin-top: 30px;
+    background: #f9f9f9;
     font-size: 16px;
     color: #333;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    max-height: 300px;
+    overflow-y: auto;
 }
