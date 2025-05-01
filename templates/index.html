@@ -17,6 +17,14 @@
     <div class="stitle">
         <h1>Fizmatik</h1>
     </div>
+
+    <div class="signup">
+        <button type="submit">Sign Up</button>
+    </div>
+    <div class="login">
+        <button type="submit">Login</button>
+    </div>
+
     <div class="container">
         <form id="solver-form">
             <textarea name="problem" placeholder="Введите математическую задачу..." required></textarea>
@@ -24,6 +32,7 @@
         </form>
         <div id="result"></div>
     </div>
+
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
