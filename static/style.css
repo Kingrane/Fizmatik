@@ -95,6 +95,10 @@ button:hover {
     filter: brightness(1.2);
 }
 
+button:active {
+    transform: scale(0.96);
+}
+
 #result {
     font-family: 'Unbounded';
     margin-top: 30px;
