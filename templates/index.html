@@ -7,33 +7,38 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <!--  ШРИФТЫ  -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
     <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
 </head>
 <body>
-    <div class="stitle">
-        <h1>Fizmatik</h1>
+    <div class="header">
+        <div class="logo">
+            <h1>Fizmatik</h1>
+        </div>
+        <div class="nav">
+            <a href="#">Pricing</a>
+            <a href="#">About</a>
+            <a href="#">Contacts</a>
+            <a href="#">Github</a>
+        </div>
+        <div class="auth">
+            <button class="login">Login</button>
+            <button class="signup">Sign Up</button>
+        </div>
     </div>
 
-    <div class="signup">
-        <button type="submit">Sign Up</button>
-    </div>
-    <div class="login">
-        <button type="submit">Login</button>
+    <div class="title">
+        <h2>Fizmatik</h2>
+        <p>твой ИИ решатель</p>
     </div>
 
     <div class="container">
         <form id="solver-form">
-            <textarea name="problem" placeholder="Введите математическую задачу..." required></textarea>
+            <input type="text" name="problem" placeholder="Введите задачу" required>
             <button type="submit">Решить</button>
         </form>
         <div id="result"></div>
     </div>
-
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
