@@ -9,10 +9,11 @@ body {
 
 /* Шапка */
 .header {
+    background: rgba(244, 242, 237, 0.3);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
+    padding: 10px 30px;
 }
 
 .logo h1 {
@@ -53,7 +54,7 @@ body {
 .title {
     letter-spacing: 3px;
     text-align: center;
-    margin: 20px 0 40px;
+    margin: 30px 0 40px;
 }
 
 .title h2 {
