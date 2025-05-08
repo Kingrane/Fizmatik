@@ -25,11 +25,32 @@ document.getElementById('solver-form').addEventListener('submit', async function
             <h3>Задача:</h3>
             <p>${data.problem}</p>
             <h3>Решение:</h3>
-            <p>${data.solution}</p>
+            <div class="solution-content">${data.solution}</div>
             <a href="/solve-page?problem=${encodeURIComponent(data.problem)}&solution=${encodeURIComponent(data.solution)}">Открыть на отдельной странице</a>
         `;
 
-        if (window.MathJax) MathJax.typeset(); // Рендер LaTeX
+        // Более надежный способ рендеринга LaTeX
+        if (window.MathJax) {
+            try {
+                // Очищаем кэш MathJax для элемента
+                MathJax.typesetClear([resultDiv]);
+
+                // Запускаем рендеринг
+                await MathJax.typesetPromise([resultDiv]);
+                console.log('MathJax успешно отрендерил формулы');
+            } catch (mathJaxError) {
+                console.error('Ошибка при рендеринге MathJax:', mathJaxError);
+
+                // Повторная попытка через небольшую задержку
+                setTimeout(() => {
+                    try {
+                        MathJax.typesetPromise([resultDiv]);
+                    } catch (e) {
+                        console.error('Повторная ошибка MathJax:', e);
+                    }
+                }, 500);
+            }
+        }
     } catch (err) {
         resultDiv.innerHTML = `<p style="color: red;">Ошибка: ${err.message}</p>`;
     }

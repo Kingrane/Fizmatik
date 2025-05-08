@@ -138,3 +138,23 @@ button[type="submit"]:hover {
     max-height: 300px;
     overflow-y: auto;
 }
+
+.pricing-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: -10px;
+    margin: 70px;
+}
+
+.pricing-row .container {
+    width: 250px;
+    text-align: center;
+    padding: 30px;
+}
+
+.price {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 20px 0;
+}

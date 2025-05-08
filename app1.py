@@ -71,6 +71,7 @@ $$x^2 -5x +6 =0$$
 **Ответ:** \(x = 2; 3\)
 
 Если задача требует подробностей, уточни: "Нужны пояснения шагов?"
+
 """
 
 
@@ -114,6 +115,7 @@ def pricing():
 @app.route('/about')
 def about():
     return render_template('about.html')
+
 
 @app.route('/solve', methods=['POST'])
 def solve():
