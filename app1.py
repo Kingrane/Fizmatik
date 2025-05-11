@@ -117,6 +117,11 @@ def about():
     return render_template('about.html')
 
 
+@app.route('/formulas')
+def formulas():
+    return render_template('formulas.html')
+
+
 @app.route('/solve', methods=['POST'])
 def solve():
     problem_text = request.form.get('problem')
