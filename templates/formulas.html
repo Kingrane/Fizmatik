@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Fizmatik - Formulas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <h1>Fizmatik</h1>
+        </div>
+        <div class="nav">
+            <a href="/pricing">Pricing</a>
+            <a href="/about">About</a>
+            <a href="/">Back Home</a>
+            <a href="https://github.com/Kingrane/Fizmatik" target="_blank" rel="noopener noreferrer">Github</a>
+        </div>
+        <div class="auth">
+            <button class="login">Login</button>
+            <button class="signup">Sign Up</button>
+        </div>
+    </div>
+
+    <div class="title">
+        <h2>Формулы</h2>
+        <p>справочник основных формул</p>
+    </div>
+
+    <div class="container">
+        <h3>Математика</h3>
+
+        <div>
+            <h4>Квадратное уравнение</h4>
+            <p>Формула корней квадратного уравнения ax² + bx + c = 0</p>
+            <p>$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$</p>
+            <hr>
+        </div>
+
+        <div>
+            <h4>Площадь круга</h4>
+            <p>Формула для вычисления площади круга по радиусу</p>
+            <p>$$S = \pi r^2$$</p>
+            <hr>
+        </div>
+
+        <div>
+            <h4>Площадь треугольника</h4>
+            <p>Формула для вычисления площади треугольника по основанию и высоте</p>
+            <p>$$S = \frac{1}{2} \cdot a \cdot h$$</p>
+            <hr>
+        </div>
+
+        <div>
+            <h4>Теорема Пифагора</h4>
+            <p>Связь между сторонами прямоугольного треугольника</p>
+            <p>$$c^2 = a^2 + b^2$$</p>
+            <hr>
+        </div>
+
+        <div>
+            <h4>Сумма арифметической прогрессии</h4>
+            <p>Формула для вычисления суммы n первых членов арифметической прогрессии</p>
+            <p>$$S_n = \frac{n(a_1 + a_n)}{2}$$</p>
+            <hr>
+        </div>
+
+        <h3>Физика</h3>
+
+        <div>
+            <h4>Кинетическая энергия</h4>
+            <p>Формула для вычисления кинетической энергии тела</p>
+            <p>$$E_k = \frac{mv^2}{2}$$</p>
+            <hr>
+        </div>
+
+        <div>
+            <h4>Закон Ома</h4>
+            <p>Связь между силой тока, напряжением и сопротивлением</p>
+            <p>$$I = \frac{U}{R}$$</p>
+            <hr>
+        </div>
+
+        <div>
+            <h4>Сила тяжести</h4>
+            <p>Формула для вычисления силы тяжести</p>
+            <p>$$F = mg$$</p>
+            <hr>
+        </div>
+
+        <h3>Информатика</h3>
+
+        <div>
+            <h4>Количество информации</h4>
+            <p>Формула для вычисления количества информации</p>
+            <p>$$I = \log_2 N$$</p>
+            <hr>
+        </div>
+
+        <div>
+            <h4>Размер файла</h4>
+            <p>Формула для вычисления размера файла</p>
+            <p>$$S = K \cdot I$$</p>
+        </div>
+    </div>
+</body>
+</html>
