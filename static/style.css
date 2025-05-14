@@ -158,3 +158,26 @@ button[type="submit"]:hover {
     font-weight: 700;
     margin: 20px 0;
 }
+
+/* Формы аутентификации */
+.auth a {
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.login {
+    background: #4CAF50;
+    color: white;
+}
+
+.signup {
+    background: #2196F3;
+    color: white;
+}
+
+.logout {
+    background: #f44336;
+    color: white;
+}

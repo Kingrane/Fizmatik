@@ -5,7 +5,9 @@
 │   ├── solve.html          # Страница решения задач
 │   ├── formulas.html       # База формул
 │   ├── login.html          # Авторизация
-│   └── profile.html        # Профиль пользователя
+│   ├── profile.html        # Профиль пользователя
+│   ├── signup.html         # регистрация
+│   └── 404.html            # ошибка 404
 ├── /static                 # CSS/JS/Изображения
 │   ├── style.css
 │   └── script.js
