@@ -1,18 +1,37 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, flash, redirect, url_for
 import requests
 import json
 import os
 import logging
 from dotenv import load_dotenv
+from flask_login import LoginManager, login_user, logout_user, current_user, login_required
+from models import db, User
 
 load_dotenv()
 
+# Инициализация Flask
 app = Flask(__name__)
+app.secret_key = os.getenv("SECRET_KEY", "your-secret-key")
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Инициализация базы данных
+db.init_app(app)
+
+# Инициализация менеджера логинов
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 MODEL = "meta-llama/llama-4-scout:free"
 
-SYSTEM_PROMPT = """
+
+SYSTEM_PROMPT = r"""
 Ты — строго специализированный помощник по математике, физике и информатике. 
 Твои возможности ограничены следующими правилами:
 
@@ -71,7 +90,6 @@ $$x^2 -5x +6 =0$$
 **Ответ:** \(x = 2; 3\)
 
 Если задача требует подробностей, уточни: "Нужны пояснения шагов?"
-
 """
 
 
@@ -154,6 +172,7 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -196,28 +215,16 @@ def solve_page():
     solution = request.args.get('solution', '')
     return render_template('solve.html', problem=problem, solution=solution)
 
-app = Flask(__name__)
-app.secret_key = os.getenv("SECRET_KEY", "your-secret-key")
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Инициализация расширений
-db.init_app(app)
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = 'login'
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
 
 # Создание таблиц БД
 with app.app_context():
     db.create_all()
 
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('404.html'), 404
 
 if __name__ == '__main__':
     app.run(debug=True)
