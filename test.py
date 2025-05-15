@@ -11,7 +11,7 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "your-secret-key")
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
@@ -27,7 +27,6 @@ def load_user(user_id):
 with app.app_context():
     db.create_all()
 
-# --- OpenRouter API ---
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 MODEL = "meta-llama/llama-4-scout:free"
 
@@ -106,6 +105,7 @@ def call_openrouter_api(problem_text):
                     {"role": "system", "content": SYSTEM_PROMPT},
                     {"role": "user", "content": problem_text}
                 ],
+                "max_tokens": 512  # <-- обязательно!
             })
         )
         response.raise_for_status()
@@ -117,8 +117,6 @@ def call_openrouter_api(problem_text):
     except Exception as e:
         logging.error(f"Ошибка OpenRouter API: {e}")
         return f"Ошибка API: {str(e)}"
-
-# --- Страницы ---
 
 @app.route('/')
 def index():
