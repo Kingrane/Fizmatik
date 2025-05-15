@@ -90,13 +90,14 @@ def call_openrouter_api(problem_text):
                     {"role": "system", "content": SYSTEM_PROMPT},
                     {"role": "user", "content": problem_text}
                 ],
+                "max_tokens": 2048  # <-- вот это обязательно!
             })
         )
-        response.raise_for_status()  # Проверка на ошибки HTTP
+        response.raise_for_status()
         return response.json()["choices"][0]["message"]["content"]
     except requests.exceptions.HTTPError as http_err:
         logging.error(f"HTTP error occurred: {http_err}")
-        logging.error(f"Response body: {response.text}")  # Логируем тело ответа
+        logging.error(f"Response body: {response.text}")
         return None
     except Exception as e:
         logging.error(f"Ошибка OpenRouter API: {e}")
