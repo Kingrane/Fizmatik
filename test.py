@@ -109,10 +109,14 @@ def call_openrouter_api(problem_text):
             })
         )
         response.raise_for_status()
-        return response.json()["choices"][0]["message"]["content"]
+        data = response.json()
+        if "choices" not in data:
+            logging.error(f"OpenRouter API error: {data}")
+            return f"Ошибка API: {data.get('error', 'Неизвестная ошибка')}"
+        return data["choices"][0]["message"]["content"]
     except Exception as e:
         logging.error(f"Ошибка OpenRouter API: {e}")
-        return None
+        return f"Ошибка API: {str(e)}"
 
 # --- Страницы ---
 
