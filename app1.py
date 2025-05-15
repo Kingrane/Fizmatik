@@ -10,7 +10,7 @@ from models import db, User
 load_dotenv()
 
 # Инициализация Flask
-app = Flask(__name__, instance_path=None)
+app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "your-secret-key")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
