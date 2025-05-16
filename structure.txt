@@ -1,5 +1,5 @@
 /fizmatik
-├── app.py                  # Главный Flask-сервер
+├── test.py                  # Главный Flask-сервер
 ├── /templates              # HTML-страницы
 │   ├── index.html          # Главная страница
 │   ├── solve.html          # Страница решения задач
@@ -11,7 +11,4 @@
 ├── /static                 # CSS/JS/Изображения
 │   ├── style.css
 │   └── script.js
-├── /data                   # База данных (JSON)
-│   ├── users.json          # Пользователи
-│   └── formulas.json       # Формулы
-└── requirements.txt        # Зависимости Python
+└── requirements.txt        
